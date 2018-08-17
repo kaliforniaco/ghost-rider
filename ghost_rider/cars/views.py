@@ -11,25 +11,32 @@ from .serializers import CarSerializer, CommentSerializer
 # Decorator.  Gets called before a function that has '@login_required' preceeding it.  
 from django.contrib.auth.decorators import login_required
 
+# To integrate built-in users
+from django.contrib.auth.models import User
+from cars.serializers import UserSerializer
+from rest_framework import permissions
 
-# from django.conf import settings
-# from django.contrib.auth import get_user_model
-# User = get_user_model()
-# class UserList(generics.ListAPIView):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
-
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 class CarList(generics.ListCreateAPIView):
   # queryset = Car.objects.all().prefetch_related('user')
   queryset = Car.objects.all()
   serializer_class = CarSerializer
+  permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+  def perform_create(self, serializer):
+    serializer.save(owner=self.request.user)
 
 class CarDetail(generics.RetrieveUpdateDestroyAPIView):
   # queryset = Car.objects.all().prefetch_related('user')
   queryset = Car.objects.all()
   serializer_class = CarSerializer
+  permission_classes = (permissions.IsAuthenticatedOrReadOnly,) 
 
 class CommentList(generics.ListCreateAPIView):
   queryset = Comment.objects.all().prefetch_related('car')
