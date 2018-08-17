@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class Car(models.Model):
     make = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
-    year = models.IntegerField(max_length=100)
+    year = models.IntegerField()
     img_url = models.CharField(max_length=100)
     # user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='cars')
     # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='cars')
@@ -21,3 +21,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.comment
+
+# class User(AbstractUser):
+#     pass
+

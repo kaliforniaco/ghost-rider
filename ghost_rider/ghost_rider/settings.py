@@ -85,6 +85,18 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'codetart_ghost_rider',
+#         'USER': 'codetart_driver',
+#         'PASSWORD': 'nutdr1v3r',
+#         'HOST': 'premium52.web-hosting.com',
+#         'PORT': 5432
+#     }
+# }
+
+# psql -h premium52.web-hosting.com -d codetart_ghost_rider -U codetart_driver
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
